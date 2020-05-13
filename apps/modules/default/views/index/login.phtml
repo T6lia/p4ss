@@ -1,0 +1,101 @@
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/themes/dist/assets/img/logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <h3>Gagner de l'argent en aidant les autres à gagner.</h3>
+            <p>passvola est une plateforme de réseautage en ligne qui vous offre beaucoup d'avantage.</p>
+            <img src="/themes/dist/assets/img/bg14-2.svg" alt="">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <div class="website-logo-inside">
+                    <a href="#">
+                        <div class="logo">
+                            <img class="logo-size" src="/themes/dist/assets/img/flat-logo.png" alt="">
+                        </div>
+                    </a>
+                </div>
+                <?php if (isset($message)): ?>
+                    <input type="hidden" value="<?= $message['message'] ?>" id="message">
+                <?php endif; ?>
+                <div style="text-align: center;">
+                    <div class="form-button">
+                        <a href="/inscription/" id="register" class="ibtn">Creer votre compte passvola</a>
+                    </div>
+                    <h6 class="text-white">- ou -</h6>
+                    <br>
+                </div>
+                <form action="/index/connect" method="post">
+                    <input class="hidden" id="hidden" type="hidden" name="hidden">
+                    <input class="form-control" type="text" name="username" placeholder="Identifiant" autocomplete="off"
+                           required="">
+                    <input class="form-control" type="password" name="password" placeholder="Mot de passe" required="">
+                    <div class="form-button">
+                        <!--<button id="inscire" type="submit" class="ibtn">S'inscrire</button>-->
+                        <button id="connecter" type="submit" class="ibtn">Se connecter</button>
+                    </div>
+                    <!--<div class="form-button">
+                        <a href="" id="lost-password">Information de mot de passe oublié</a>
+                    </div>-->
+                </form>
+                <!--<div class="other-links">
+                    <span>Or login with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade warning" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="logo text-center">
+                    <img class="logo-size" style="width: 10%;" src="/themes/dist/assets/img/logo.png" alt="">
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center" id="confirm-content"></div>
+            <div class="modal-footer">
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var message = $('#message').attr('value');
+
+        if (message != '') {
+
+            $("#modal").modal('show');
+            $('#confirm-content').html(message);
+        }
+    });
+    $(document).ready(function () {
+
+        $('#connecter').click(function () {
+            $('#hidden').val('connexion');
+        });
+        $('#inscire').click(function () {
+            $('#hidden').val('register');
+        });
+        $('#lost-password').click(function () {
+            $('#hidden').val('lost-password');
+        });
+    });
+</script>

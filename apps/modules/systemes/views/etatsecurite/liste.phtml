@@ -1,0 +1,121 @@
+<?php
+$tabUrl = parse_url($_SERVER ['REQUEST_URI']);
+$part_uri = '?' . View::getDataIn($tabUrl, 'query');
+unset($aRole[0]);
+?>
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-10 title-block">
+            <h4 class="page-title text-center">Rapport etat de sécurite</h4>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/etatsecurite/exporter/<?= $part_uri ?>">
+                    <i class="fa fa-arrow-alt-circle-up"></i>
+                    <span>Exporter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="/systemes/etatsecurite/liste/" method="GET">
+    <div class="header-filter card-footer">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="user" class="control-label">Nom et prénom</label>
+                    <select name="user" id="user" class=" form-control selectpicker show-tick" data-live-search="true" title="Choisissez...">
+                        <option></option>
+                        <?php foreach ($aUser as $user): ?>
+                            <option value="<?= $user['id'] ?>" <?= $user['id'] == $data['user'] ? 'selected' : '' ?>><?= $user['lastname'] . ' ' . $user['firstname'] ?></option>=
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="username" class="control-label">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" name="username" id="username" value="<?= View::getDataIn($data, 'username') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="debut" class="control-label">Date debut</label>
+                    <input type="text" class="form-control datepicker" name="debut" id="debut" value="<?= View::getDataIn($data, 'debut') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="fin" class="control-label">Date fin </label>
+                    <input type="text" class="form-control datepicker" name="fin" id="fin" value="<?= View::getDataIn($data, 'fin') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="role" class="control-label">Rôle</label>
+                    <select name="role" id="role" class=" form-control selectpicker show-tick" data-live-search="true" title="Choisissez...">
+                        <option></option>
+                        <?php foreach ($aRole as $role): ?>
+                            <option value="<?= $role['id'] ?>" <?= $role['id'] == $data['role'] ? 'selected' : '' ?>><?= $role['role_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="tache" class="control-label">Tâche autorisée</label>
+                    <select name="tache" id="tache" class=" form-control selectpicker show-tick" data-live-search="true" title="Choisissez...">
+                        <option></option>
+                        <?php foreach ($aTache as $tache): ?>
+                            <option value="<?= $tache['id'] ?>" <?= $tache['id'] == $data['tache'] ? 'selected' : '' ?>><?= $tache['titre'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="bottom-right alert-success btn btn-filter" type="submit" >Valider</button>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table table-hover table-striped dataTable">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Nom d'utilisateur</th>
+            <th>Date 1er login </th>
+            <th>Rôle</th>
+            <th>Menu</th>
+            <th>Sous-menu</th>
+            <th>Tâches autorisées </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($aSecuriy as $item): 
+             $sous_menu = $item['sm_titre'] ? $item['sm_titre'] : $item['sm_label'];
+             $menu = $item['m_titre'] ? $item['m_titre'] : $item['m_label'];             
+             if(is_null($menu)){
+                  $menu = $sous_menu;
+                  $sous_menu = "";
+             }             
+             ?>
+            <tr>
+                <td><?= $item['lastname'] ?></td>
+                <td><?= $item['firstname'] ?></td>
+                <td><?= $item['username'] ?></td>
+                <td><?= $item['first_connect'] ? date('d/m/Y', strtotime($item['first_connect'])) : '-' ?></td>
+                <td><?= $item['role'] ?></td>
+                <td><?= $menu ?></td>
+                <td><?= $sous_menu ?></td>
+                <td><?= $item['tache'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php Layout::render('part/pagination', compact('pagination')); ?>
+
+<script type="application/javascript">
+    $('#debut').daterangepicker();
+</script>

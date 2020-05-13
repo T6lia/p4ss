@@ -1,0 +1,44 @@
+
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-10 title-block">
+            <h3 class="page-title">Liste des secteurs</h3>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/secteur/importer/">
+                    <i class="material-icons">arrow_downward</i>
+                    <span>Importer</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/secteur/exporter/">
+                    <i class="material-icons">arrow_upward</i>
+                    <span>Exporter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table dataTable table-striped table-hover">
+    <thead>
+        <tr>
+            <th><a href="<?= View::urlToSort('code') ?>">Code <i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('nom') ?>">Nom <i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('region') ?>">Region <i class="fa fa-caret-down"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($aSecteur as $secteur) : ?>
+            <tr>
+                <td><?= $secteur['code'] ?></td>
+                <td><?= $secteur['nom'] ?></td>
+                <td><?= $secteur['region'] ?></td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<?php Layout::render('part/pagination', compact('pagination')); ?>

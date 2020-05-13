@@ -1,0 +1,10 @@
+<?php if (!empty($aSubmenu)) : ?>
+    <label for="submenu" class="control-label">Sous menu</label>
+    <select id="submenu" class=" form-control selectpicker show-tick" name="menu" data-live-search="true" required title="Choisissez...">
+        <?php foreach ($aSubmenu as $menu): ?>
+            <option value="<?= $menu['code'] ?>"><?= $menu['label'] ?></option>
+        <?php endforeach; ?>
+    </select>
+<?php else: ?><?php endif; ?>
+
+

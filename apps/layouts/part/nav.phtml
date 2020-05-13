@@ -1,0 +1,27 @@
+<!-- START MAIN NAVIGATION -->
+<?php
+$menus = array(
+    array( 'link' => '/index/', 'title' => Text::__('Home'), 'class' => 'fa-home' )
+);
+$currentController = '/' . lcfirst(Request::getInstance()->getController()) . '/';
+if($currentController == '/index/'){
+    $currentController =  '/stable/';
+}
+?>
+
+<div class="menu  col-md-12">
+    <ul id="nav" class="sf-menu">
+        <?php foreach( $menus as $menu) { ?>
+        <li class=" <?php echo ($menu['link']==$currentController) ? 'current_page_item' : ''?> ">
+            <i class="fa <?php echo $menu['class'] ?>"></i>
+            <a href="<?php echo $menu['link'] ?>">
+                <?php echo $menu['title'] ?>
+                <div style="position:absolute; left: 50%;">
+                    <span class="triangle">&nbsp;</span>
+                </div>
+            </a>
+        </li>
+        <?php } ?>
+    </ul>
+</div>
+<!-- END MAIN NAVIGATION -->

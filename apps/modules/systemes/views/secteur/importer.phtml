@@ -1,0 +1,36 @@
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-12 title-block">
+            <h3 class="page-title">Importation CSV</h3>
+        </div>
+    </div>
+</div>
+<form enctype="multipart/form-data" class="form-valida" method="POST">
+    <div class="form-container one-column">
+        <input type="hidden" name="token" value="">
+        <!--<input type="File" name="fichier" accept=".csv" required="required">-->
+             <div class="file-upload">
+                    <div class="file-select">
+                        <div class="file-select-button" id="fileName">Choisir un fichier</div>
+                        <div class="file-select-name" id="noFile">Aucun fichier séléctionné..</div>
+                        <input type="file" name="fichier" accept=".csv" required="required" id="fichier">
+                    </div>
+                </div>
+    </div>
+    <div class="action-group">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <button class="btn btn-default alert-success center" type="submit">Valider</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="/systemes/secteur/liste/" class="btn btn-cancel" >
+                            Retour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

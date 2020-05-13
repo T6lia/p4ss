@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="alert alert-danger">
+
+        <h1 class="alert-danger"><i class="fa fa-warning" >&nbsp;</i><?= Session::getVar("accessMsg") ?></h1>
+    </div>
+    <h3>Vous n'avez pas l'autorisation d'acceder à cette page!<br> Ou le lien n'est pas encore disponible! <br>Veuillez
+        contacter votre administrateur</h3>
+    <div class="action-group">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+					<div class=" col-md-6">
+						<button type="submit" class="btn btn-default alert-success center" onclick="history.back()"> <i class="fa fa-arrow-left fw" ></i>Page précédante</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

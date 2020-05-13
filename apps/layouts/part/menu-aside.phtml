@@ -1,0 +1,57 @@
+<?php
+$oSession = new Session();
+$userInfos = $oSession->getUser();
+$userRoleId = 0;
+if (isset($userInfos->role_id)) {
+    $userRoleId = (int) $userInfos->role_id;
+}
+$menus = Apps::getMenu($userRoleId);
+?>
+
+<!-- Main Sidebar Container -->
+<!-- Brand Logo -->
+<a href="/" class="brand-link navbar-purple">
+    <img src="/themes/dist/img/logo-white.png" alt="" class="brand-image"
+         style="opacity: .8">
+    <span class="brand-text font-weight-light"><b>passvola</b></span>
+</a>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <?php foreach ($menus as $module) : ?>
+            <?php $isCurModule = Request::isCurrentModule($module['slug'], ' ') ?>
+            <li class="nav-item has-treeview">
+                <a href="<?php echo ($module['link']) ? Request::getUrl($module['link']) : '#' ?>" class="nav-link active">
+                    <i class="nav-icon fa <?php echo $module['icon'];?>"><?php $module['icon'] ?></i>
+                    <p><?php echo $module['label'] ?><i class="right fas fa-angle-left"></i></p>
+                </a>
+                <?php if (isset($module['child'])) : ?>
+                <ul class="nav nav-treeview">
+                    <?php foreach ($module['child'] as $controller): ?>
+                    <?php $isCurController = Request::isCurrentController($controller['link']) ?>
+                    <li class="nav-item has-treeview">
+                        <a href="<?php echo Request::getUrl($controller['link']) ?>" class="nav-link <?php echo $isCurController ? 'active' : '' ?>">
+                            <i class="far fa-circle nav-icon"><?php //echo $controller['icon'] ?></i>
+                            <p><?php echo $controller['label'] ?></p>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>
+<!-- /.sidebar -->
+
+<script>
+    $(function () {
+        $('.nav-link.active').parent().addClass('menu-open in').parent().addClass('active');
+    });
+</script>
+

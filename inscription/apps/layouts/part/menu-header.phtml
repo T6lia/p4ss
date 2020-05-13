@@ -1,0 +1,24 @@
+<ul class="nav navbar-top-links ">
+    <li class="dropdown">
+        <?php
+        $oSession = new Session();
+        $dataSession = $oSession->getUser();
+        ?>
+            <!--<i class="fa fa-user fa-fw"></i>-->
+        <!--Bien venue--> 
+        <label class="userName">
+            <?=  isset($dataSession->lastname)? $dataSession->lastname. ' ' : '' ?>  
+            <?=  isset($dataSession->firstname)? $dataSession->firstname. ' ' : '' ?>  
+        </label>
+        <label>            
+            <?=  isset($dataSession->role_id)? '['.$dataSession->role_name. ']' : '' ?>  
+        </label>
+    </li>
+    <li class="dropdown">
+        <a href="/index/logout">
+            <i class="fa fa-sign-out fa-fw"></i>
+        </a>
+    </li>
+    <!-- /.dropdown -->
+</ul>
+<!-- /.navbar-top-links -->

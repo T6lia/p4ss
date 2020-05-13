@@ -1,0 +1,150 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Liste des Pack</h4>
+        <br>
+    </div>
+</div>
+<?php if (2 == $user->role_id): ?>
+<div class="row col-md-12">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 link-element">
+        <div class="add-link link-with-icon">
+            <a href="/systemes/pack/create">
+                <i class="fa fa-plus-circle"></i>
+                <span>Ajout pack</span>
+            </a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<br>
+<form action="/systemes/pack/liste/" method="GET">
+    <div class="card-footer header-filter">
+        <div class="text-left">
+            <label for="site" class="control-label">Pack</label>
+            <input type="text" id="nom_pack" class="col-md-2" name="nom_pack" value="<?= $data['nom_pack'] ?>">
+            <button class="alert-success btn btn-filter" type="submit" >Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped projects">
+    <thead>
+    <tr>
+        <th style="width: 20%">Nom pack</th>
+        <th>Bonus direct</th>
+        <th>Bonus indirect</th>
+        <th style="width: 5%">Niveau</th>
+        <th style="width: 5%">Largeur</th>
+        <th>Bonus</th>
+        <th>Prix</th>
+        <th>Validité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($pack as $item): ?>
+    <tr>
+        <td><?= $item['nom_pack']?></td>
+        <td><?= $item['bonus_direct']?> %</td>
+        <td><?= $item['bonus_indirect'] ?> %</td>
+        <td><?= $item['niveau']?></td>
+        <td><?= $item['largeur']?></td>
+        <td><?= $item['bonus']?></td>
+        <td><?= number_format($item['prix'], 0, '.', ' ')?> Ar</td>
+        <td><?= $item['validite_fin'] ?> jours</td>
+        <td class="project-actions text-right">
+            <a class="btn btn-success btn-sm" href="#" id="detail_<?=$item['id']?>"><i class="fas fa-folder"></i></a>
+            <?php if (2 == $user->role_id): ?>
+                <a class="btn btn-info btn-sm" href="/systemes/pack/modifier/id/<?=$item['id']?>"><i class="fas fa-pencil-alt"></i></a>
+                <a class="btn btn-danger btn-sm" href="#" id="pack_<?=$item['id']?>"><i class="fas fa-trash"></i></a>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="logo text-center">
+                    <img class="logo-size" style="width: 10%;" src="/themes/dist/assets/img/logo.png" alt="">
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Supprimer ce pack</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default link-cancel" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-primary link-ok">Oui</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="pack-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="logo text-center">
+                    <img class="logo-size" style="width: 5%;" src="/themes/dist/assets/img/logo.png" alt="">
+                    <h6 class="modal-title">Détail pack</h6>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="pack-content"></div>
+        </div>
+    </div>
+</div>
+
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>
+
+<script type="application/javascript">
+
+    $(function () {
+        var idPack = "";
+        $("a[id^='pack_'").each(function () {
+            $(this).bind("click", function () {
+                var id_pack = $(this).attr("id");
+                var a_attr = id_pack.split("_");
+                idPack = a_attr[1];
+                $("#modal").modal('show');
+            });
+        });
+
+        // lancer l'import
+        $(".link-ok").bind("click", function () {
+            $("#modal").modal('hide');
+            document.location.href = "/systemes/pack/supprimer/id/" + idPack;
+        });
+
+        $(".link-cancel").bind("click", function () {
+            $("#modal").modal('hide');
+        });
+    });
+
+    $(function () {
+
+        var detailPack = "";
+        $("a[id^='detail_'").each(function () {
+            $(this).bind("click", function () {
+                var detail_pack = $(this).attr("id");
+                var detail_attr = detail_pack.split("_");
+                detailPack = detail_attr[1];
+                $('#pack-content').load('/systemes/pack/detail/id/' + detailPack, null, $('#pack-modal').modal('show'));
+            });
+        });
+
+    });
+
+</script>
+

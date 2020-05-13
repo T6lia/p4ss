@@ -1,0 +1,139 @@
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/inscription/themes/dist/assets/img/flat-logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <img class="md-size" src="/inscription/themes/dist/assets/css/graphic7.png" alt="">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <h3 class="form-title" style="color: #934ba0">Inscription sur passvola</h3>
+                <ul class="nav" id="stepsTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="">Etape 4</a>
+                    </li>
+                </ul>
+                    <div class="separator"></div>
+                    <div class="form-subtitle">3. Choix du pack</div>
+                <?php if ($packUser == ''): ?>
+                <div class="row">
+                    <?php foreach ($packs as $item): ?>
+                        <div class="col-md-12 center-block">
+                            <div class="card card-purple card-outline">
+                                <div class="card-body box-profile">
+                                    <h3 class="profile-username text-center"><?= $item['nom_pack']?></h3>
+                                    <br>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Niveau</b> <a class="float-right"><?= $item['niveau'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Largeur</b> <a class="float-right"><?= $item['largeur'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Bonus Direct</b> <a class="float-right"><?= $item['bonus_direct'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Bonus indirect</b> <a class="float-right"><?= $item['bonus_indirect'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Bonus</b> <a class="float-right"><?= $item['bonus'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Description</b> <a class="float-right"><?= $item['description'] ?></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Validite:</b> <a class="float-right"><?= $item['validite_fin'] ?></a>
+                                        </li>
+                                    </ul>
+                                    <form method="POST" action="/roles/role/choixpack">
+                                        <input type="hidden" name="id_parent" value="<?= $roles['parent_id'] ?>">
+                                        <input type="hidden" name="id" value="<?= $roles['id_appli'] ?>">
+                                        <input type="hidden" name="username_parent" value="<?= $roles['parent_username'] ?>">
+                                        <input type="hidden" name="username" value="<?= $roles['username_appli'] ?>">
+                                        <input type="hidden" name="pack" value="<?= $item['nom_pack'] ?>">
+                                        <div class="form-button">
+                                            <button class="btn btn-info btn-block" type="submit"><b>Choisir</b></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php else: ?>
+                    <div class="col-md-12 center-block">
+                        <div class="card card-purple card-outline">
+                            <div class="card-body box-profile">
+                                <h3 class="profile-username text-center"><?= $packUser['nom_pack']?></h3>
+                                <br>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Niveau</b> <a class="float-right"><?= $packUser['niveau'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Largeur</b> <a class="float-right"><?= $packUser['largeur'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Bonus Direct</b> <a class="float-right"><?= $packUser['bonus_direct'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Bonus indirect</b> <a class="float-right"><?= $packUser['bonus_indirect'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Bonus</b> <a class="float-right"><?= $packUser['bonus'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Description</b> <a class="float-right"><?= $packUser['description'] ?></a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Validite:</b> <a class="float-right"><?= $packUser['validite_fin'] ?></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <form method="POST" action="/roles/role/choixpack">
+                        <input type="hidden" name="id_parent" value="<?= $roles['parent_id'] ?>">
+                        <input type="hidden" name="id" value="<?= $roles['id_appli'] ?>">
+                        <input type="hidden" name="username_parent" value="<?= $roles['parent_username'] ?>">
+                        <input type="hidden" name="username" value="<?= $roles['username_appli'] ?>">
+                        <div class="form-button">
+                            <button id="submit" type="submit" class="ibtn">Suivant</button>
+                        </div>
+                    </form>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+   /* .card {
+
+        background-color: #934ba0;
+    }
+    .card-title {
+
+        color: white;
+    }*/
+</style>

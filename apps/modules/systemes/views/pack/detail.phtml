@@ -1,0 +1,45 @@
+<?php
+$niveau = $pack['niveau'];
+$largeur = $pack['largeur'];
+$bd = $pack['bonus_direct'];
+$bi = $pack['bonus_indirect'];
+$prix = $pack['prix'];
+?>
+<h5 class="title text-center bg-warning">Gain maximum: <?= number_format($gain, 0, ' ', ' ' ) ?> Ar</h5>
+<h6 class="card bg-success"><?= $pack['description'] ?></h6>
+<table class="table table-striped no-border projects">
+    <tbody>
+    <tr>
+        <td><b>Nom pack:</b></td>
+        <td><?=$pack['nom_pack']?></td>
+    </tr>
+    <tr>
+        <td><b>Niveau:<b></td>
+        <td><?= $niveau ?></td>
+    </tr>
+    <tr>
+        <td><b>Largeur:</b></td>
+        <td><?= $largeur ?></td>
+    </tr>
+    <tr>
+        <td><b>Bonus direct</b></td>
+        <td><?= $bd ?> %</td>
+    </tr>
+    <tr>
+        <td><b>Bonus indirect</b></td>
+        <td><?= $bi ?> %</td>
+    </tr>
+    <tr>
+        <td><b>Bonus:</b></td>
+        <td><?=$pack['bonus']?></td>
+    </tr>
+    <tr>
+        <td><b>Prix:</b></td>
+        <td><?=number_format($prix, '0', '.', ' ')?> Ar</td>
+    </tr>
+    <tr>
+        <td><b>Validité:</b></td>
+        <td><?= $pack['validite_fin']?> jours</td>
+    </tr>
+    </tbody>
+</table>

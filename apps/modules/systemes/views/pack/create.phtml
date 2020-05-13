@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Créer Pack</h4>
+        <br>
+    </div>
+</div>
+<form method="post" class="form-valida">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Nom du pack</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="nom_pack" name="nom_pack"
+                       placeholder="Nom du pack">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus_direct" class="col-sm-2 col-form-label">Bonus direct</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="bonus_direct" name="bonus_direct"
+                       placeholder="Bonus direct" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus_indirect" class="col-sm-2 col-form-label">Bonus indirect</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="bonus_indirect" name="bonus_indirect"
+                       placeholder="Bonus indirect" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="niveau" class="col-sm-2 col-form-label">Nombre de niveau</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="niveau" name="niveau"
+                       placeholder="Nombre de niveau" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="largeur" class="col-sm-2 col-form-label">Largeur</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="largeur" name="largeur"
+                       placeholder="Largeur" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus" class="col-sm-2 col-form-label">Bonus</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="bonus" name="bonus" placeholder="Bonus">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="prix" class="col-sm-2 col-form-label">Prix</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="prix" name="prix" placeholder="Prix du pack">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="validite_debut" class="col-sm-2 col-form-label">Validité</label>
+            <div class="col-sm-6">
+                <input type="numer" class="form-control" id="validite_fin" name="validite_fin"
+                       placeholder="Validité" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" name="description" id="description" placeholder="Description"></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Ajouter</button>
+    </div>
+</form>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<table xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" id="1" name="Table3" displayName="Table3" ref="A1:B51" totalsRowShown="0" headerRowDxfId="0"><autoFilter ref="A1:B51"/><tableColumns count="2"><tableColumn id="1" name="Valeur de dimension"/><tableColumn id="2" name="Description"/></tableColumns><tableStyleInfo name="TableStyleMedium2" showFirstColumn="0" showLastColumn="0" showRowStripes="1" showColumnStripes="0"/></table>

@@ -1,0 +1,16 @@
+; config.ini 
+db_driver=mysql
+db_user=#db_user#
+db_password=#db_pass#
+
+[dsn]
+host=#db_host#
+port=#db_port#
+dbname=#db_name#
+
+[db_options]
+PDO::MYSQL_ATTR_INIT_COMMAND=set names utf8
+
+[db_attributes]
+ATTR_ERRMODE=ERRMODE_EXCEPTION
+;

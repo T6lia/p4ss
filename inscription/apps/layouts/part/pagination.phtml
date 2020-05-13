@@ -1,0 +1,84 @@
+<hr>
+<?php
+$separateur = substr($pagination['uri'], -1, 1) != '/' ? '/' : '';
+$active_l = isset($_GET['l']) && is_numeric($_GET['l']) ? $_GET['l'] : 15;
+$items = $active_l != 15 ? '&l=' . $active_l : '';
+$active_p = isset($_GET['p']) && is_numeric($_GET['p']) ? $_GET['p'] : 1;
+$par_page = array(15, 25, 50, 100);
+$separateur_uri = substr($pagination['uri'], -1, 1) != '/' ? '/' : '';
+$tabUrl = parse_url($_SERVER ['REQUEST_URI']);
+$aParams = array();
+if (key_exists('query', $tabUrl)) {
+    $listparam = explode("&", $tabUrl ['query']);
+    foreach ($listparam as $value) {
+        if ($value != '') {
+            $param = explode('=', $value);
+            $aParams[$param[0]] = $param[1];
+        }
+    }
+}
+?>
+<div>
+    <div class="row">
+        <div class="col-lg-10">
+            <form method="GET" action="<?= $pagination['uri'] . $separateur_uri ?>" style="display: inline-block">
+                <?php
+                foreach ($aParams as $key => $value) :
+                    if ($value != '' && $key != 'l' && $key != 'p') :
+                        ?>
+                <input type="hidden" name="<?= $key ?>" value="<?= urldecode($value) ?>">
+                        <?php
+                    endif;
+                endforeach;
+                ?>
+                <div>
+                    <label for="item-page">Affichage par page : </label>
+                    <select id="item-page" name="l" onchange="form.submit()">
+                        <?php foreach ($par_page as $item) : ?>
+                            <option value="<?= $item ?>" <?= $active_l == $item ? 'selected' : '' ?>><?= $item ?></option>
+                        <?php endforeach; ?>           
+                    </select>  
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2 text-right">
+            <label>Résultat : </label><span> <?= $pagination['nombre_result'] ?></span>
+        </div>
+    </div>
+
+    <?php if ($pagination['nombre_result'] > $active_l) : ?>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item <?= $pagination['current'] <= 1 ? 'disabled' : '' ?>">
+                    <a class="page-link" href="<?= $pagination['current'] <= 1 ? '' : $pagination['uri'] . $separateur . '?p=' . ($pagination['current'] - 1) . '&' . $pagination['part_uri'] . $items ?>"><i class="fa fa-angle-left"></i></a>
+                </li>
+
+                <?php if ($pagination['current'] > 6) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $pagination['uri'] . $separateur . '?p=1' . '&' . $pagination['part_uri'] . $items ?>">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php for ($i = $pagination['debut']; $i <= $pagination['fin']; $i++) : ?>
+                    <li class="page-item <?= $i == $pagination['current'] ? 'active' : '' ?>">
+                        <a class="page-link" href="<?= $pagination['uri'] . $separateur . '?p=' . $i . '&' . $pagination['part_uri'] . $items ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+                <?php if ($pagination['fin'] < $pagination['end_pagination']) : ?>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $pagination['uri'] . $separateur . '?p=' . $pagination['end_pagination'] . '&' . $pagination['part_uri'] . $items?>"><?= $pagination['end_pagination']  ?></a>
+                    </li>
+                <?php endif; ?>
+                <li class="page-item <?= $pagination['current'] >= $pagination['page'] ? 'disabled' : '' ?>">
+                    <a class="page-link" href="<?= $pagination['current'] >= $pagination['page'] ? '' : $pagination['uri'] . $separateur . '?p=' . ($pagination['current'] + 1) . '&' . $pagination['part_uri'] . $items ?>"><i class="fa fa-angle-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    <?php endif; ?>
+</div>

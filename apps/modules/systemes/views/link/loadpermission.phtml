@@ -1,0 +1,46 @@
+<form method="POST" action="/systemes/link/savepermission">
+    <input type="hidden" name="link" value="<?= $aLink['id'] ?>">
+    <input type="hidden" name="redirect" value="<?= $sRedirect ?>">
+    <table class="table table-bordered">
+        <tr>
+            <th>Lien</th>
+            <td><?= $aLink['urls_segment'] ?></td>
+        <tr>
+        <tr>
+            <th>Permission</th>
+            <td>
+                <div>
+                    <input type="checkbox" id="all" value="1" class="check_all">
+                    <label for="all">Tous</label>
+                </div> 
+                <?php foreach ($aPermission as $role) : ?>
+                    <div>
+                        <input class="check_role" type="checkbox" name="<?= $role->id ?>" id="<?= $role->role_name ?>" <?= $role->permission ? 'checked' : '' ?> value="1">
+                        <label for="<?= $role->role_name ?>"><?= $role->role_name ?></label>
+                    </div>             
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-offset-8 col-md-4">
+                    <button id="action_save" type="submit" class="btn btn-default alert-success center" value="save">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+        $('.check_all').change(function () {
+            if($(this).is(':checked')){
+                $('.check_role').prop('checked', true);
+            }else{                
+                $('.check_role').removeAttr('checked');
+            }
+        });
+    });
+</script>

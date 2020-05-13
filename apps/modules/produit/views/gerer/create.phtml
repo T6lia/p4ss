@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h5 class="card-footer page-header text-center">Attribuer un produit</h5>
+        <br>
+    </div>
+</div>
+<form method="post" class="form-valida">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="type_produit" class="col-sm-2 col-form-label">Type de produit</label>
+            <div class="col-sm-6">
+                <select class="form-control selectpicker" name="type_produit" id="type_produit">
+                    <option value="">-- Filtre par produit --</option>
+                    <?php foreach ($produit as $prod): ?>
+                        <option value="<?=$prod['type']?>"><?=($prod['type'] == 'carte_passvola')?'carte' : ''?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="numero" class="col-sm-2 col-form-label">Numéro</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="numero" name="numero"
+                       placeholder="Numéro de la carte" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="distributeur" class="col-sm-2 col-form-label">Distributeur</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="distributeur" name="distributeur" placeholder="Distributeur"
+                value="<?=$user->username?>" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="proprietaire" class="col-sm-2 col-form-label">Propriétaire</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="proprietaire" name="proprietaire" placeholder="Propriétaire">
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Ajouter</button>
+    </div>
+</form>

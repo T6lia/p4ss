@@ -1,0 +1,173 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29 janv. 2018, 12:14:03
+    Author     : holy.pascale
+*/
+
+
+
+@font-face
+{
+    font-family: 'RobotoSlab';
+    src: local('☺'),
+        url('../fonts/RobotoSlab.woff2') format('woff2'),
+        url('../fonts/RobotoSlab.woff') format('woff'),
+        url('../fonts/RobotoSlab.ttf') format('truetype'),
+        url('../fonts/RobotoSlab.svg#RobotoSlab') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'RobotoSlab';
+    src: local('☺'),
+        url('../fonts/RobotoSlabBold.woff2') format('woff2'),
+        url('../fonts/RobotoSlabBold.woff') format('woff'),
+        url('../fonts/RobotoSlabBold.ttf') format('truetype'),
+        url('../fonts/RobotoSlabBold.svg#RobotoSlabBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+/*@font-face
+{
+    font-family: 'RobotoSlab';
+    src: local('☺'),
+        url('../fonts/RobotoSlabMedium.woff2') format('woff2'),
+        url('../fonts/RobotoSlabMedium.woff') format('woff'),
+        url('../fonts/RobotoSlabMedium.ttf') format('truetype'),
+        url('../fonts/RobotoSlabMedium.svg#RobotoSlabMedium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}*/
+@font-face
+{
+    font-family: 'RobotoSlab';
+    src: local('☺'),
+        url('../fonts/RobotoSlabLight.woff2') format('woff2'),
+        url('../fonts/RobotoSlabLight.woff') format('woff'),
+        url('../fonts/RobotoSlabLight.ttf') format('truetype'),
+        url('../fonts/RobotoSlabLight.svg#RobotoSlabLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'RobotoSlab';
+    src: local('☺'),
+        url('../fonts/RobotoSlabUltraLight.woff2') format('woff2'),
+        url('../fonts/RobotoSlabUltraLight.woff') format('woff'),
+        url('../fonts/RobotoSlabUltraLight.ttf') format('truetype'),
+        url('../fonts/RobotoSlabUltraLight.svg#RobotoSlabExtraLight') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/*MAVEN PRO FONTS*/ 
+
+
+@font-face
+{
+    font-family: 'MavenPro';
+    src: local('☺'),
+        url('../fonts/MavenPro.woff2') format('woff2'),
+        url('../fonts/MavenPro.woff') format('woff'),
+        url('../fonts/MavenPro.ttf') format('truetype'),
+        url('../fonts/MavenPro.svg#MavenPro') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'MavenPro';
+    src: local('☺'),
+        url('../fonts/MavenProBold.woff2') format('woff2'),
+        url('../fonts/MavenProBold.woff') format('woff'),
+        url('../fonts/MavenProBold.ttf') format('truetype'),
+        url('../fonts/MavenProBold.svg#MavenProBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'MavenPro';
+    src: local('☺'),
+        url('../fonts/MavenProMedium.woff2') format('woff2'),
+        url('../fonts/MavenProMedium.woff') format('woff'),
+        url('../fonts/MavenProMedium.ttf') format('truetype'),
+        url('../fonts/MavenProMedium.svg#MavenProMedium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+/*@font-face
+{
+    font-family: 'MavenPro';
+    src: local('☺'),
+        url('../fonts/MavenProLight.woff2') format('woff2'),
+        url('../fonts/MavenProLight.woff') format('woff'),
+        url('../fonts/MavenProLight.ttf') format('truetype'),
+        url('../fonts/MavenProLight.svg#MavenProLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'MavenPro';
+    src: local('☺'),
+        url('../fonts/MavenProUltraLight.woff2') format('woff2'),
+        url('../fonts/MavenProUltraLight.woff') format('woff'),
+        url('../fonts/MavenProUltraLight.ttf') format('truetype'),
+        url('../fonts/MavenProUltraLight.svg#MavenProExtraLight') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}*/
+
+@font-face
+{
+    font-family: 'ImperialTobacco';
+    src: local('☺'),
+        url('../fonts/ImperialTobacco.woff2') format('woff2'),
+        url('../fonts/ImperialTobacco.woff') format('woff'),
+        url('../fonts/ImperialTobacco.ttf') format('truetype'),
+        url('../fonts/ImperialTobacco.svg#ImperialTobacco') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('../fonts/MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

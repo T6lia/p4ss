@@ -1,0 +1,68 @@
+
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-10 title-block">
+            <h4 class="text-center page-title">Liste des roles</h4>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/role/create">
+                    <i class="fa fa-plus-circle"></i>
+                    <span>Ajout rôle</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-hover table-striped dataTable" >
+    <thead>
+        <tr>
+            <th><a href="<?= View::urlToSort('code') ?>">Code <i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('role_name') ?>">Nom du code <i class="fa fa-caret-down"></i></a></th>
+            <th colspan="2" class="action-cell centered">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($roles as $role) : ?>
+            <tr >
+                <td><?= $role['code'] ?></td>
+                <td><?= $role['role_name'] ?></td>
+                <td class="action-cell">
+                    <a href="<?php echo  '/' . 'systemes/role/edit/id/' . $role['id'] ?>" data-toggle="tooltip" title="Modifier" data-placement="bottom">
+                        <i class="fa fa-check"></i>
+                    </a>
+                </td>
+                <td class="action-cell">
+                    <a class="roledelete" href="#" data-role_id="<?php echo $role['id'] ?>" data-toggle="tooltip" title="Supprimer" data-placement="bottom">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>
+<script type="text/javascript">
+	$(document).on('click', '.roledelete', function(){
+		var roleId = $(this).data('role_id');
+		$.ajax({
+                        url: '/systemes/role/getroleattachment/id_role/'+$(this).data('role_id'),
+                        type: 'POST',
+                        success: function (data) {
+                            if(data == 0){
+								window.location.href = '/systemes/role/delete/id/' + roleId;
+							}else{
+								showLoadingPopup('Impossible de supprimer ce rôle qui est rattachée a des utilisateurs.');
+							}
+                        }
+                    });
+	});
+
+	$(document).on('click', '#modal-wait-please-text', function(){
+		hideLoadingPopup();
+	});
+
+</script>

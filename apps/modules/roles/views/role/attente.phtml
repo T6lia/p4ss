@@ -1,0 +1,41 @@
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/inscription/themes/dist/assets/img/flat-logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <img class="" src="/inscription/themes/dist/assets/img/flat-logo.png" style="width: 100%">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <form method="POST" action="/roles/role/attente">
+                    <input type="hidden" value="<?= $user->id ?>" name="id">
+                    <div class="tab-content" id="stepsTabContent">
+                        <div class="tab-pane fade active show" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                            <div class="tab-pane active" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                                <div class="logo">
+                                    <img class="logo" src="/inscription/themes/dist/assets/img/bienvenue.png" alt="" style="width: 110%">
+                                </div>
+                            </div>
+                            <div class="separator"></div>
+                            <div class="form-subtitle">
+                                <h6 class="text-gray">Lorsque vous avez réçu le SMS de confirmation veuillez
+                                    se connecter en utilisant votre identifiant <b>(<?= $user->username ?>)</b> et votre mot de passe</h6>
+                            </div>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Se connecter</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

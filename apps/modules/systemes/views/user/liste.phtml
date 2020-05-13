@@ -1,0 +1,124 @@
+
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-10">
+            <h4 class="text-center page-title">Gestion des utilisateurs</h4>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/user/create">
+                    <i class="fa fa-plus-circle"></i>
+                    <span>Ajout utilisateur</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="/systemes/user/liste/" method="GET">
+    <div class="card-footer header-filter">
+        <div class="text-left">
+            <label for="site" class="control-label">Role</label>
+            <select name="role_id" id="site" class="custom-select show-tick col-md-2">
+                <option value="">---Filtre par role---</option>
+                <?php foreach ($roles as $role): ?>
+                    <option value="<?php echo $role->id ?>" <?= $role->id == $data['role_id'] ? 'selected' : '' ?>><?php echo $role->role_name ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button class="bottom-right alert-success btn btn-filter" type="submit" >Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-hover table-striped dataTable">
+    <thead>
+        <tr>
+            <th><a href="<?= View::urlToSort('lastname') ?>">Nom<i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('firstname') ?>">Prénom<i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('username') ?>">Nom d'utilisateur <i class="fa fa-caret-down"></i></a></th>
+            <th><a href="<?= View::urlToSort('role') ?>">Rôle de l'utilisateur<i class="fa fa-caret-down"></i></a></th>
+            <th colspan="3" class=" action-cell centered">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?php echo $user['lastname'] ?></td>
+                <td><?php echo $user['firstname'] ?></td>
+                <td><?php echo $user['username'] ?></td>
+                <td><?php echo $user['role'] ?></td>
+                <td class="action-cell">
+                    <a href="<?php echo '/' . 'systemes/user/edit/id/' . $user['id'] ?>" data-toggle="tooltip" title="Modifier" data-placement="bottom">
+                        <i class="fa fa-folder-plus"></i>
+                    </a>
+                </td>
+                <td class="action-cell">
+                    <?php if ($bAuthStatut) : ?>
+                        <a href="<?= '/' . 'systemes/user/statut/id/' . $user['id'] ?>" class="statut-user" data-toggle="tooltip" title="<?= !is_null($user['is_disabled']) ? "Activée" : "Mise en veille" ?>" data-placement="bottom">
+                            <?php if (is_null($user['is_disabled'])) : ?>
+                                <i class="fa fa-check-circle"></i>
+                            <?php else: ?>
+                                <i class="fa fa-check-circle">radio_button_unchecked</i>
+                            <?php endif; ?>
+                        </a>
+                    <?php endif; ?>
+                </td>
+                <td class="action-cell">
+                    <a href="<?php echo '/' . 'systemes/user/delete/id/' . $user['id'] ?>" class="delete-user" data-toggle="tooltip" title="Effacer" data-placement="bottom">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>
+
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" >
+            </div>
+            <div class="modal-body" id="delete_modal_body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-default alert-success" id="valid_delete_user">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".delete-user").click(function (e) {
+        e.preventDefault();
+        $("#delete_modal_body").html('');
+        $("#delete_modal .modal-header").html('Supprimer un utiliasteur');
+        $("#delete_modal").modal("show");
+        var url = $(this).attr('href');
+        $.get(url, function (data) {
+            $("#delete_modal_body").html(data);
+        });
+    });
+
+    $(".statut-user").click(function (e) {
+        e.preventDefault();
+        $("#delete_modal_body").html('');
+        $("#delete_modal .modal-header").html('Modifier statut utilisateur');
+        $("#delete_modal").modal("show");
+        var url = $(this).attr('href');
+        $.get(url, function (data) {
+            $("#delete_modal_body").html(data);
+        });
+    });
+
+    $("#valid_delete_user").click(function (e) {
+        e.preventDefault();
+        var form = $("#delete_modal_body").find('form');
+        form.submit();
+    })
+</script>

@@ -1,0 +1,82 @@
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/inscription/themes/dist/assets/img/flat-logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <img class="md-size" src="/inscription/themes/dist/assets/css/graphic7.png" alt="">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <h3 class="form-title" style="color: #934ba0">Inscription sur passvola</h3>
+                <ul class="nav" id="stepsTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 4</a>
+                    </li>
+                </ul>
+                <form method="POST" action="/roles/role/attente">
+                    <div class="separator"></div>
+                    <div class="form-subtitle text-gray">Pour terminer votre inscription veuillez envoyer la somme de :
+                        <b class="text-gray-dark"><?= $infopack['prix'] ?>  <?= UNITE_MONETAIRE ?></b> au numéro:
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card card-widget widget-user-2">
+                            <div class="widget-user-header bg-success">
+                                <div class="widget-user-image">
+                                    <img alt="User Avatar" class="img-circle elevation-2"
+                                         src="/themes/dist/img/telma.jpg">
+                                </div>
+                                <h4 class="widget-user-username">MVola</h4>
+                                <h5 class="widget-user-desc"><?= $mVola['numero'] ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-12">
+                        <div class="card card-widget widget-user-2">
+                            <div class="widget-user-header bg-black">
+                                <div class="widget-user-image">
+                                    <img alt="User Avatar" class="img-circle elevation-2"
+                                         src="/themes/dist/img/orange.png">
+                                </div>
+                                <h4 class="widget-user-username">Orange Money</h4>
+                                <h5 class="widget-user-desc"><?/* $mVola['numero'] */?></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card card-widget widget-user-2">
+                            <div class="widget-user-header bg-white">
+                                <div class="widget-user-image">
+                                    <img alt="User Avatar" class="img-circle elevation-2"
+                                         src="/themes/dist/img/airtel.png">
+                                </div>
+                                <h4 class="widget-user-username">Airtel Money</h4>
+                                <h5 class="widget-user-desc"><?/*= $mVola['numero'] */?></h5>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="separator"></div>
+                    <div class="form-button">
+                        <button id="submit" type="submit" class="ibtn">Suivant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

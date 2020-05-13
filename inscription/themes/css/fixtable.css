@@ -1,0 +1,83 @@
+#fixed_hdr1,
+#fixed_hdr2 {
+    font-size: 0.85em;
+}
+
+#fixed_hdr1 {
+    width: 14000px;
+}
+
+#fixed_hdr1 td {
+    width: 86px;
+}
+
+#fixed_hdr2 {
+    width: 3500px;
+}
+
+#fixed_hdr1 .codeetape,
+#fixed_hdr1 .months.even,
+#fixed_hdr1 .firstdays th,
+#fixed_hdr1 .carbuintrant th
+#fixed_hdr2 .codeetape,
+#fixed_hdr2 .months.even,
+#fixed_hdr2 .carbuintrant th {
+    background-color: #fff !important;
+}
+
+#fixed_hdr1 .months.odd,
+#fixed_hdr1 .weeks th,
+#fixed_hdr1 .blank,
+#fixed_hdr2 .blank {
+    background-color: #fff !important;
+}
+
+
+#fixed_hdr1 .months {
+    text-transform: capitalize;
+}
+
+#fixed_hdr1 td,
+#fixed_hdr1 th,
+#fixed_hdr2 td,
+#fixed_hdr2 th {
+    padding: 5px 2px;
+    overflow-wrap: break-word;
+    border: 1px solid #000;
+}
+
+#fixed_hdr1 th,
+#fixed_hdr2 th {
+    text-align: center;
+}
+
+#fixed_hdr1 td,
+#fixed_hdr2 td {
+    text-align: right;
+}
+
+#fixed_hdr1 .leftcol,
+#fixed_hdr2 .leftcol {
+    font-weight: bold;
+    text-align: left;
+}
+
+#fixed_hdr1 .evenline,
+#fixed_hdr2 .evenline {
+    background-color: #e8e8e8;
+}
+
+#fixed_hdr1 .oddline,
+#fixed_hdr2 .oddline {
+    background-color: #f5f5f5;
+}
+
+.libelle,
+.brr {
+    font-weight: bold;
+}
+
+
+
+
+

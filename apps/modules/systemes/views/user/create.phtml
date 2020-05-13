@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Créer utilisateur</h4>
+        <br>
+    </div>
+</div>
+
+<form method="post" action="/systemes/user/create">
+    <input type="hidden" value="15" name="role_id">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="username" id="username">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="parent_username" class="col-sm-2 col-form-label">Parent username</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="parent_username" id="parent_username">
+                <input type="hidden" name="parent_id" id="parent_id">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Parent pack</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="pack" id="nom_pack" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nom" class="col-sm-2 col-form-label">Nom</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="nom" id="nom">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="prenom" class="col-sm-2 col-form-label">Prénom</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="prenom" id="prenom">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" name="mail" id="mail">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="telephone" class="col-sm-2 col-form-label">Téléphone</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="telephone" id="telephone">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="adresse" class="col-sm-2 col-form-label">Adresse</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="adresse" id="adresse">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="identite" class="col-sm-2 col-form-label">N° CIN</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="identite" id="identite">
+            </div>
+        </div>
+        <input type="hidden" name="confirme_check" value="validee">
+        <input type="hidden" name="date_confirmation" value="<?= date('Y-m-d H:i:s') ?>">
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Ajouter</button>
+    </div>
+</form>
+
+<script src="/themes/js/typeahead.js"></script>
+<script type="application/javascript">
+
+    $(function () {
+        $(document).on('change', '#parent_username', function () {
+            var username = $(this).val();
+            $.ajax({
+                url: '/systemes/profil/getParent/username/' + username,
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#nom_pack').val(data.pack);
+                        $('#parent_id').val(data.id_appli)
+                    }
+                }
+            });
+        });
+    });
+</script>

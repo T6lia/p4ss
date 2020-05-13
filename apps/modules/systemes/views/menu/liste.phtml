@@ -1,0 +1,235 @@
+<?php
+$tabUrl = parse_url($_SERVER ['REQUEST_URI']);
+$part_uri = '?' . View::getDataIn($tabUrl, 'query');
+?>
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-2 title-block">
+            <h4 class="page-title text-center">Liste des menus</h4>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/menu/exporter/<?= $part_uri ?>">
+                    <i class="fa fa-arrow-circle-up"></i>
+                    <span>Exporter CSV</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/menu/importer/">
+                    <i class="fa fa-arrow-circle-down"></i>
+                    <span>Importer</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/menu/extraire/<?= $part_uri ?>">
+                    <i class="fa fa-file-export"></i>
+                    <span>Exporter XLS</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="/systemes/menu/liste/" method="GET">
+    <div class="card-footer header-filter">
+        <div class="text-left">
+            <label for="titre" class="control-label">Menu: </label>
+                <input type="text" class="col-md-4" name="titre" value="<?= View::getDataIn($aData, 'titre') ?>">
+            <label for="role_name" class="control-label">Rôles: </label>
+                <input type="text" class="col-md-4" name="role_name" value="<?= View::getDataIn($aData, 'role_name') ?>">
+            <button class="bottom-right alert-success btn btn-filter" type="submit" >Filtrer</button>
+        </div>
+    </div>
+</form>
+
+<form method="POST">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Menu/Sous menu/Lien</th>
+                <?php foreach ($aRole as $role) : ?>
+                    <th><?= $role['role_name'] ?></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($aMenu as $menu): ?>
+                <tr class="parent <?= 'menu_' . $menu['code'] ?>">
+                    <td><?= $menu['titre'] ? $menu['titre'] : $menu['label'] ?></td>
+                    <?php
+                    foreach ($aRole as $role) :
+                        $checked = in_array($role['id'], $menu['roles']) ? "checked" : "";
+                        ?>
+                        <td>
+                            <input type="checkbox" class="menu role_<?= $role['id'] ?> icheck-primary" data-type="menu" data-role="role_<?= $role['id'] ?>" data-code="<?= $menu['code'] ?>" data-default="<?= $checked == "" ? 0 : 1 ?>" <?= $checked ?> >
+                            <input type="hidden" class="menu-value" value="<?= $role['id'] ?>">
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php foreach ($menu['child'] as $subMenu): ?>
+                    <tr class="child <?= 'sous_menu_' . $subMenu['code'] ?>">
+                        <?php if (!is_null($subMenu['code'])) : ?>
+                            <td><?= $subMenu['titre'] ? $subMenu['titre'] : $subMenu['label'] ?></td>
+                            <?php
+                            foreach ($aRole as $role) :
+                                $checked = in_array($role['id'], $subMenu['roles']) ? "checked" : "";
+                                ?>
+                                <td>
+                                    <input type="checkbox" class="submenu role_<?= $role['id'] ?>" data-role="role_<?= $role['id'] ?>" data-type="menu" data-menu="<?= $menu['code'] ?>" data-code="<?= $subMenu['code'] ?>" data-default="<?= $checked == "" ? 0 : 1 ?>" <?= $checked ?> >
+                                    <input type="hidden" class="menu-value" value="<?= $role['id'] ?>">
+                                </td>
+                                <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </tr>
+                    <?php foreach ($subMenu['link'] as $link): ?>
+                        <tr class="child-2">
+                            <td><?= $link['url'] ?></td>
+                            <?php
+                            foreach ($aRole as $role) :
+                                $checked = in_array($role['id'], $link['roles']) ? "checked" : "";
+                                ?>
+                                <td>
+                                    <input type="checkbox" class="link role_<?= $role['id'] ?>" data-role="role_<?= $role['id'] ?>" data-submenu="<?= $subMenu['code'] ? $subMenu['code'] : $menu['code'] ?>" data-type="link" data-code="<?= $link['code'] ?>" data-default="<?= $checked == "" ? 0 : 1 ?>" <?= $checked ?> >
+                                    <input type="hidden" class="menu-value" value="<?= $role['id'] ?>">
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php if ($bAuthModifier) : ?>
+        <div class="action-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class=" col-md-6">
+                            <button id="action_save" type="submit" class="btn btn-default alert-success center" value="save">Sauvegarder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</form>
+
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>
+<style>
+    .child td:first-child{
+        padding-left: 20px!important;
+        text-align: left;
+    }
+    .parent{
+        background-color: #444;
+        color: #FFF;
+    }
+    .child{
+        background-color: #EEE;
+    }
+    .child-2 td:first-child{
+        padding-left: 30px!important;
+        text-align: left;
+    }
+    .parent td:first-child{
+        text-align: left;
+    }
+    table th, table td{
+        font-size: 11px!important;
+        text-align: center;
+    }
+
+
+    table th{
+        background-color: #aaa5a0;
+        border: none !important;
+        color: #fff;
+        font-weight: 200 !important;
+    }
+
+   /* input[type="checkbox"]:before {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        content: "\f096";
+        opacity: 1 !important;
+        appearance: none;
+    }
+
+    input[type="checkbox"]:checked:before {
+        content: "\f046";
+        margin-left: 4px;
+    }
+
+    input[type="checkbox"] {
+        font-size: 22px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }*/
+
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $(':checkbox').change(function () {
+            var checkbox = $(this), has_checked = checkbox.is(':checked'), input_value = checkbox.next(".menu-value"),
+                    default_value = checkbox.data('default'), code = checkbox.data('code'), type = checkbox.data('type');
+
+            if (has_checked) {
+                if (default_value == 1) {
+                    input_value.removeAttr('name');
+                } else {
+                    input_value.attr('name', type + '_add[' + code + '][]');
+                }
+            } else {
+                if (default_value == 0) {
+                    input_value.removeAttr('name');
+                } else {
+                    input_value.attr('name', type + '_remove[' + code + '][]');
+                }
+            }
+        });
+
+        $('.link').change(function () {
+            var link = $(this);
+            if (link.prop("checked") == true) {
+                //cocher sous menu si ce n'est pas fait ou menu si pas de sous menu
+                if ($('.sous_menu_' + link.data('submenu')).length > 0)
+                    $('.sous_menu_' + link.data('submenu')).find(':checkbox.' + link.data('role')).prop('checked', 'checked').trigger('change');
+                else
+                    $('.menu_' + link.data('submenu')).find(':checkbox.' + link.data('role')).prop('checked', 'checked').trigger('change');
+            }
+        });
+
+        $('.submenu').change(function () {
+            var submenu = $(this);
+            //cocher menu si ce n'est pas fait si non dechocher les liens si décocher
+            if (submenu.prop("checked") == true)
+                $('.menu_' + submenu.data('menu')).find(':checkbox.' + submenu.data('role')).prop('checked', 'checked').trigger('change');
+            else
+                $(".link[data-submenu='" + submenu.data('code') + "']." + submenu.data('role')).prop('checked', false).trigger('change');
+
+        });
+
+        $('.menu').change(function () {
+            var menu = $(this);
+            //décocher sous menu si menu décocher ainsi que lien
+            if (menu.prop("checked") == false) {
+                if ($(".submenu[data-menu='" + menu.data('code') + "']").length > 0)
+                    $(".submenu[data-menu='" + menu.data('code') + "']." + menu.data('role')).prop('checked', false).trigger('change');
+                else
+                    $(".link[data-submenu='" + menu.data('code') + "']." + menu.data('role')).prop('checked', false).trigger('change');
+            }
+        });
+    });
+</script>

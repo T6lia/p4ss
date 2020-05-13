@@ -1,0 +1,66 @@
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-12 title-block">
+            <h3 class="page-title">Edition d'un lien</h3>
+        </div>
+    </div>
+</div>
+<form method="POST" class="form-horizontal form-valida" action="/systemes/link/create">
+    <input type="hidden" id="id" class="hidden" name="id" value="<?= $aData['id'] ?>">
+    <div class="form-container two-column">   
+        <div class="form-group">
+            <label for="menu" class="control-label">Menu</label>
+            <select id="menu" class=" form-control selectpicker show-tick" required name="menu" data-live-search="true" title="Choisissez...">
+                <option></option>
+                <?php foreach ($aMenu as $menu): ?>
+                    <option value="<?= $menu['code'] ?>" <?= $menu['code'] == $aData['parent'] ? 'selected' : '' ?>><?= $menu['label'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group" id="sub_menu">
+            <label for="menu" class="control-label">Sous menu</label>
+            <select id="menu" class=" form-control selectpicker show-tick" name="menu" data-live-search="true" title="Choisissez...">
+                <option></option>
+                <?php foreach ($aSubMenu as $menu): ?>
+                    <option value="<?= $menu['code'] ?>" <?= $menu['code'] == $aData['menu'] ? 'selected' : '' ?>><?= $menu['label'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label " for="titre">Titre </label>
+            <input type="text" class="form-control" id="titre" name="titre"  required="" value="<?= $aData['titre'] ?>">
+        </div>
+        <div class="form-group">
+            <label class="control-label " for="link">lien </label>
+            <input type="text" class="form-control" id="link" name="urls_segment"  required="" value="<?= $aData['urls_segment'] ?>">
+        </div>
+    </div>
+    <div class="action-group">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class=" col-md-6">
+                        <button id="action_save" type="submit" class="btn btn-default alert-success center" value="save">Sauvegarder</button>
+                    </div>
+                    <div class=" col-md-6 right">
+                        <button type="button" class="btn btn-default center btn-cancel annuler" onclick="history.back()">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $('#menu').change(function () {
+        var menu = $(this).val();
+        $.ajax({
+            url: "/systemes/menu/submenu/menu/" + menu,
+            dataType: "html",
+            success: function (html) {
+                $('#sub_menu').html(html);
+                $('#sub_menu select').selectpicker('refresh');
+            }
+        });
+    });
+</script>

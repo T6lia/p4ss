@@ -1,0 +1,105 @@
+<?php
+$tabUrl = parse_url($_SERVER ['REQUEST_URI']);
+$part_uri = '?' . View::getDataIn($tabUrl, 'query');
+?>
+<div class="header-page">
+    <div class="row title-container">
+        <div class="col-md-10 title-block">
+            <h4 class="page-title text-center">Historique changement de rôle</h4>
+        </div>
+        <div class="col-md-2 link-element">
+            <div class="add-link link-with-icon">
+                <a href="/systemes/logroleuser/exporter/<?= $part_uri ?>">
+                    <i class="material-icons">arrow_upward</i>
+                    <span>Exporter</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="/systemes/logroleuser/liste/" method="GET">
+    <div class="header-filter card-footer">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="lastname" class="control-label">Nom</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" value="<?= View::getDataIn($aData, 'lastname') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="firstname" class="control-label">Prénom</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" value="<?= View::getDataIn($aData, 'firstname') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="username" class="control-label">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" name="username" id="username" value="<?= View::getDataIn($aData, 'username') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="debut" class="control-label">Date debut</label>
+                    <input type="text" class="form-control datepicker" name="debut" id="debut" value="<?= View::getDataIn($aData, 'debut') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="fin" class="control-label">Date fin </label>
+                    <input type="text" class="form-control datepicker" name="fin" id="fin" value="<?= View::getDataIn($aData, 'fin') ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="type" class="control-label">Type</label>
+                    <select name="type" id="type" class=" form-control selectpicker show-tick" data-live-search="true" title="Choisissez...">
+                        <option></option>
+                        <option value="Création" <?= View::getDataIn($aData, 'type') == 'Création' ? 'selected' : '' ?>>Création</option>
+                        <option value="Modification rôle" <?= View::getDataIn($aData, 'type') == 'Modification rôle' ? 'selected' : '' ?>>Modification rôle</option>
+                        <option value="Ajout rôle" <?= View::getDataIn($aData, 'type') == 'Ajout rôle' ? 'selected' : '' ?>>Ajout rôle</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="bottom-right alert-success btn btn-filter" type="submit" >Filtrer</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table table-hover table-striped dataTable">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Nom d'utilisateur</th>
+            <th>Rôle existant</th>
+            <th>Nouveau rôle</th>
+            <th>Type</th>
+            <th>Date de mise à jour</th>
+            <th>Motif du remplacement</th>
+            <th>Résolution</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($aLog as $log): ?>
+            <tr>
+                <td><?= $log['lastname'] ?></td>
+                <td><?= $log['firstname'] ?></td>
+                <td><?= $log['username'] ?></td>
+                <td><?= $log['old_role'] ? $log['old_role'] : '-' ?></td>
+                <td><?= $log['new_role'] ?></td>
+                <td><?= $log['type'] ?></td>
+                <td><?= date('d/m/Y', strtotime($log['updated_at'])) ?></td>
+                <td><?= $log['motif'] ? $log['motif'] : '-' ?></td>
+                <td><?= $log['resolution'] ? $log['resolution'] : '-' ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>

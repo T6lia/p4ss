@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Profil</h4>
+        <br>
+    </div>
+</div>
+<div class="col-md-12 row">
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Nombre d'affilié direct max pour votre pack</span>
+                    <span class="info-box-number"><?= $affilieMax ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-envelope"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Votre nombre d'affilié </span>
+                    <span class="info-box-number"><?= $affilieUser ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Nombre d'affilié restant</span>
+                    <?php if ($affilieRestant >= 0) : ?>
+                        <span class="info-box-number"><?= $affilieRestant ?></span>
+                    <?php else: ?>
+                        <span class="info-box-number">
+                            <h6 class="text-gray">Vous ne pouvez plus ajouter d'affilié. Proposer à l'un de votre réseau</h6>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 center-block">
+        <div class="card card-purple card-outline">
+            <div class="card-body box-profile">
+                <div class="text-center">
+                    <img class="profile-user-img img-fluid img-circle"
+                         src="/themes/dist/img/avatar6.png"
+                         alt="User profile picture">
+                </div>
+                <h3 class="profile-username text-center"><?= $data['username_appli'] ?></h3>
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b>Nom</b> <a class="float-right"><?= $data['nom'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Prénom</b> <a class="float-right"><?= $data['prenom'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Téléphone</b> <a class="float-right"><?= $data['telephone'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Email</b> <a class="float-right"><?= $data['mail'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Adresse</b> <a class="float-right"><?= $data['adresse'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>N°CIN</b> <a class="float-right"><?= $data['identite'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Pack</b> <a class="float-right"><?= $data['pack'] ?></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Parrain</b> <a class="float-right"><?= $data['parent_username'] ?></a>
+                    </li>
+                </ul>
+
+                <a href="/roles/role/modifier/id/<?= $data['id'] ?>" class="btn btn-info btn-block"><b>Modifier</b></a>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+

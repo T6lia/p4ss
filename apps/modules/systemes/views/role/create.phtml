@@ -1,0 +1,49 @@
+
+<div class="header-page">
+<div class="row title-container">
+        <div class="col-md-12 title-block">
+            <h3 class="page-title">Ajouter un rôle</h3>
+        </div>
+    </div>
+</div>
+<form method="POST" class="form-horizontal form-valida" action="<?php echo  '/' . 'systemes/role/save' ?>" id="user-creation">
+  <div class="form-container one-column">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="code">Code </label>
+                    <input type="text" class="form-control" name="code" id="code" placeholder="Code"  required="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="role_name">Nom du role </label>
+                    <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Nom du role"   required="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="action-group">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                  <div class=" col-md-4">
+                      <button id="action_save" type="submit" class="btn btn-default alert-success center" value="save">Sauvegarder</button>
+                  </div>
+                  <div class="col-md-4">
+                    <button class="btn btn-default alert-success center" id="action_add" type="submit" value="add">Sauvegarder/Créer</button>
+                  </div>
+                  <div class=" col-md-4 right">
+                      <button type="button" class="btn btn-default center btn-cancel annuler" onclick="history.back()">Annuler</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+  $('#action_save').click(function () {
+    $('#hidden').val('save');
+  });
+  $('#action_add').click(function() {
+    $('#hidden').val('add');
+  });
+</script>

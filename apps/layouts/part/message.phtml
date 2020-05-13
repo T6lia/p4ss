@@ -1,0 +1,7 @@
+<?php if($msg = Session::getMessage()) { ?>
+<br>
+<div class="alert alert-<?php echo $msg['code'] ?> alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
+    <?php echo $msg['message'] ?>
+</div>
+<?php } ?>

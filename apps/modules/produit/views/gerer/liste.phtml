@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h5 class="card-footer page-header text-center">Gérer les produits</h5>
+        <br>
+    </div>
+</div>
+<div class="col-md-12 row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2 link-element">
+        <div class="add-link link-with-icon">
+            <a href="/produit/gerer/create">
+                <i class="fa fa-plus-circle"></i>
+                <span>Attribuer un produit</span>
+            </a>
+        </div>
+    </div>
+</div>
+<form action="/produit/gerer/liste/" method="GET">
+    <div class="card-footer header-filter">
+        <div class="text-left">
+            <label for="numero" class="control-label">Numero</label>
+            <input type="text" id="numero" class="col-md-2" name="numero" value="<?=$data['numero']?>">
+            <label for="proprietaire" class="control-label">Propriétaire</label>
+            <input type="text" id="proprietaire" class="col-md-2" name="proprietaire" value="<?=$data['proprietaire']?>">
+            <button class="alert-success btn btn-filter" type="submit" >Filtrer</button>
+        </div>
+    </div>
+</form>
+<table class="table table-striped projects">
+    <thead>
+        <tr>
+            <th>Type de produit</th>
+            <th>Identifiant produit</th>
+            <th>Distributeur</th>
+            <th>Propriétaire</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($produit as $item): ?>
+        <tr>
+            <td><?=($item['type_produit'] == 'carte_passvola')?'carte' : ''?></td>
+            <td><?=$item['numero']?></td>
+            <td><?=$item['distributeur']?></td>
+            <td><?=$item['proprietaire']?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<?php
+Layout::render('part/pagination', compact('pagination'));
+?>
+

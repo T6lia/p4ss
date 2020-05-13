@@ -1,0 +1,109 @@
+<!--<div class="row">
+    <div class="col-lg-12">
+        <h5 class="card-footer page-header text-center">Inscription</h5>
+        <br>
+    </div>
+</div>
+<div class="row col-lg-12">
+    <div class="col-lg-12">
+        <ul id="progressbar">
+            <li class="active">Parrain</li>
+            <li class="active">Choix du pack</li>
+            <li class="active">Information personnel</li>
+            <li>Confirmation</li>
+        </ul>
+    </div>
+</div>
+<form method="post" class="form-valida" action="/roles/role/info">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="nom" class="col-sm-2 col-form-label">Nom (*)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="prenom" class="col-sm-2 col-form-label">Prénom (*)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="mail" name="mail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="telephone" class="col-sm-2 col-form-label">Téléphone (*)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Télephone" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="adresse" class="col-sm-2 col-form-label">Adresse (*)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="identite" class="col-sm-2 col-form-label">N°CIN</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="identite" name="identite" placeholder="Numéro CIN">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Suivant</button>
+    </div>
+</form>-->
+
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/inscription/themes/dist/assets/img/flat-logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <img class="md-size" src="/inscription/themes/dist/assets/css/graphic7.png" alt="">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <h3 class="form-title" style="color: #934ba0">Inscription sur passvola</h3>
+                <ul class="nav" id="stepsTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 4</a>
+                    </li>
+                </ul>
+                <form method="POST" action="/roles/role/info">
+                    <div class="separator"></div>
+                    <div class="form-subtitle">4. Entrer votre information personnelle</div>
+                    <input type="text" class="form-control" placeholder="Nom" name="nom" id="nom" required>
+                    <input type="text" class="form-control" placeholder="Prénom" name="prenom" id="prenom" required>
+                    <input type="email" class="form-control" placeholder="E-mail" name="mail" id="mail">
+                    <input type="text" class="form-control" placeholder="Télephone" name="telephone" id="telephone" required>
+                    <input type="text" class="form-control" placeholder="Adresse" name="adresse" id="adresse" required>
+                    <input type="text" class="form-control" placeholder="CIN" name="identite" id="identite">
+                    <div class="separator"></div>
+                    <div class="form-button">
+                        <button id="submit" type="submit" class="ibtn">Suivant</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

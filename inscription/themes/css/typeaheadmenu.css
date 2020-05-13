@@ -1,0 +1,18 @@
+.typeahead li {
+  height: 40px;
+}
+
+.typeahead li a {
+  display: block;
+  height: 100%;
+  outline: transparent;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.typeahead .active a:hover,
+.typeahead .active a:active,
+.typeahead .active a:focus {
+  background-color: #f7f5f8;
+  color: #262626;
+}

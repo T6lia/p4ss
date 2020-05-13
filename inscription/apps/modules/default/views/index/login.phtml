@@ -1,0 +1,96 @@
+<div class="website-logo">
+    <a href="#">
+        <div class="logo">
+            <img class="logo-size" src="/inscription/themes/dist/assets/img/flat-logo.png" alt="">
+        </div>
+    </a>
+</div>
+<div class="row">
+    <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+            <img class="md-size" src="/inscription/themes/dist/assets/css/graphic7.png" alt="">
+        </div>
+    </div>
+    <div class="form-holder">
+        <div class="form-content">
+            <div class="form-items">
+                <h3 class="form-title" style="color: #934ba0">Inscription sur passvola</h3>
+                <!--<div class="hidden">
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">x</button>
+                        TEST
+                    </div>
+                </div>-->
+                <ul class="nav" id="stepsTabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="linear-progress">Etape 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="">Etape 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="">Etape 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="">Etape 4</a>
+                    </li>
+                </ul>
+                <form method="POST" action="/inscription/index/login">
+                    <div class="separator"></div>
+                    <div class="tab-content" id="stepsTabContent">
+                        <div class="tab-pane fade active show" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                            <div class="tab-pane active" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+                                <div class="form-subtitle">1. Entrer votre identifiant et mot de passe</div>
+                                <input type="text" class="form-control" placeholder="Entrer votre identifiant"
+                                       name="username" id="username" required autocomplete="off">
+                                <input type="password" class="form-control" placeholder="Entrer mot de passe"
+                                       name="password" required>
+                            </div>
+                            <div class="separator"></div>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Suivant</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>
+    // credit card
+    var cleaveCreditCard = new Cleave(".input-credit-card", {
+        creditCard: true,
+        onCreditCardTypeChanged: function (type) {
+            type = type.split("15")[0];
+            $('.input-with-ccicon #ccicon').removeClass();
+            if (type != "unknown") {
+                if (type == "diners") {
+                    $('.input-with-ccicon #ccicon').addClass('fab fa-cc-diners-club');
+                } else {
+                    $('.input-with-ccicon #ccicon').addClass('fab fa-cc-' + type);
+                }
+            }
+        }
+    });
+</script>-->
+<script src="/inscription/themes/js/typeahead.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $(document).on('change', '#parent_username', function () {
+            console.log($(this).val());
+            var username = $(this).val();
+            $.ajax({
+                url: '/systemes/profil/getParent/username/' + username,
+                dataType: 'json',
+                success: function (data) {
+                    if (data) {
+                        $('#nom_pack').val(data.pack);
+                        $('#parent_id').val(data.id_appli)
+                    }
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,4 @@
+<form action="<?= $action ?>" method="POST">
+    Mettre en <?= !is_null($user['is_disabled']) ? "actif" : "veille" ?> l'utilisateur?
+    <input type="hidden" name="delete" value="delete">
+</form>

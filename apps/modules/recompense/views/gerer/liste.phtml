@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Porte feuille</h4>
+        <br>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header pr-2">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#debit" data-toggle="tab">Débit</a></li>
+                <li class="nav-item"><a class="nav-link" href="#credit" data-toggle="tab">Crédit</a></li>
+                <li class="nav-item"><a class="nav-link" href="#solde" data-toggle="tab">Solde</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="active tab-pane" id="debit">
+                    <h6 class="text-gray">Nombre d'affilié</h6>
+                    <div class="row col-md-4">
+                        <table class="table table-striped table-bordered">
+                            <?php
+                            $affilieDirect = $debitDirect['direct'];
+                            $affilieIndirect = $debitDirect['reste'] - $debitDirect['direct'];
+                            ?>
+                            <tr>
+                                <td><b>Nombre d'affilié direct</b></td>
+                                <td><?= $affilieDirect ?></td>
+                            </tr>
+                            <tr>
+                                <td><b>Nombre d'affilié indirect</b></td>
+                                <td><?= $affilieIndirect ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h6 class="text-gray">Bonus</h6>
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Montant</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $gainDirect = $soldeUser['gainDirect'];
+                                $gainIndirect = $soldeUser['gainIndirect'];
+                                $totalGain = $gainDirect + $gainIndirect;
+                                ?>
+                                <tr>
+                                    <td>Bonus direct</td>
+                                    <td><?= $gainDirect ?></td>
+                                    <td><?= $gainDirect ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Bonus indirect</td>
+                                    <td><?= $gainIndirect ?></td>
+                                    <td><?= $gainIndirect ?></td>
+                                </tr>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="2" style="text-align: right"><b>TOTAL</b></td>
+                                    <td><b><?= Apps::convertMoney($totalGain) ?> Ar </b></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <h6 class="text-gray">Transaction passvola</h6>
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Montant</th>
+                                    <th>Description</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $sousTotalDebit = 0;
+                                $sousTotalCredit = 0;
+                                ?>
+                                <?php foreach ($debit as $item): ?>
+                                <?php
+                                ($item['date_mouvement'] == "")? $dateDebit = "" :  $dateDebit = Apps::convertDate($item['date_mouvement'], 'd/m/Y');
+                                    $sousTotalDebit += $item['valeur'];
+                                    ?>
+                                <tr>
+                                    <td><?= $dateDebit ?></td>
+                                    <td><?= $item['valeur'] ?></td>
+                                    <td><?= $item['mouvement'] ?></td>
+                                    <td><?= $item['valeur']?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td colspan="3" style="text-align: right"><b>TOTAL</b></td>
+                                    <td><b><?= $sousTotalDebit ?> Ar </b></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="tab-pane" id="credit">
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Montant</th>
+                                    <th>Description</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($credit as $item): ?>
+                                <?php
+                                $date = Apps::convertDate($item['date_mouvement'], 'd/m/Y');
+                                $sousTotalCredit += $item['valeur'];
+                                    ?>
+                                    <tr>
+                                        <td><?= $date ?></td>
+                                        <td><?= $item['valeur'] ?></td>
+                                        <td><?= $item['mouvement'] ?></td>
+                                        <td><?= $item['valeur']?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="3" style="text-align: right"><b>TOTAL :</b></td>
+                                    <td><b><?= $sousTotalCredit ?> Ar</b></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="tab-pane" id="solde">
+                    <div class="row">
+                        <div class="col-12 table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;">Total Débit</th>
+                                    <th style="text-align: center;">Total Crédit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $credit = $totalcredit['credit'];
+                                $debit = $totaldebit['debit'] + $totalGain;
+                                $solde = $debit  - $credit;
+                                ?>
+                                <tr>
+                                    <td style="text-align: center;"><?=  $debit ?></td>
+                                    <td style="text-align: center;"><?= $credit  ?></td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td style="text-align: center; font-size: 25px; font-weight: bold; background: #acbad5" colspan="2">
+                                        <b>SOLDE:   </b>
+                                        <?= Apps::convertMoney($solde) ?> <?= UNITE_MONETAIRE ?>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

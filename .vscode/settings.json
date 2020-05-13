@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "symfony4",
+            "dialect": "MySQL",
+            "name": "design",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

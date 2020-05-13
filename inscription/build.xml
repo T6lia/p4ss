@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soctam" default="build" basedir=".">
+    <property file="${project.basedir}/build.properties" />
+
+    <target name="clean" description="supprime les repertoires de build">
+        <delete dir="${build_directory}/api" />
+        <delete dir="${build_directory}/code-browser" />
+        <delete dir="${build_directory}/coverage" />
+        <delete dir="${build_directory}/logs" />
+        <delete dir="${build_directory}/pdepend" />
+        <delete dir="${build_directory}/package" />
+        <delete dir="${build_directory}/test" />
+    </target>
+
+    <target name="prepare" description="crée les repertoires de build">
+        <mkdir dir="${build_directory}/api" />
+        <mkdir dir="${build_directory}/code-browser" />
+        <mkdir dir="${build_directory}/coverage" />
+        <mkdir dir="${build_directory}/logs" />
+        <mkdir dir="${build_directory}/pdepend" />
+        <mkdir dir="${build_directory}/package" />
+        <mkdir dir="${build_directory}/test" />
+    </target>
+
+    <fileset dir="${project.basedir}/" defaultexcludes="true" id="excluded_files">
+        <include name="**/**" />
+        <exclude name="${build_directory}/**" />
+        <exclude name="utils/**" />
+        <exclude name="build*.*" />
+    </fileset>
+
+    <target name="sdist" description="crée une archive de distribution des sources" depends="prepare">
+        <echo msg="Creer le fichier src.tar.gz" />
+        <tar destfile="${build_directory}/package/soctam-src.tar.gz" compression="gzip">
+            <fileset dir="${project.basedir}/" defaultexcludes="true">
+                <include name="**/**" />
+                <exclude name="${build_directory}/**" />
+            </fileset>
+        </tar>
+    </target>
+
+    <target name="bdist" description="crée une archive avec vendor" depends="build,compile-configuration">
+        <echo msg="Creer le fichier bin.tar.gz" />
+        <tar destfile="${build_directory}/package/soctam-bin.tar.gz" compression="gzip">
+            <fileset dir="${project.basedir}/" defaultexcludes="true">
+                <include name="**/**" />
+                <exclude name="${build_directory}/**" />
+            </fileset>
+        </tar>
+    </target>
+
+    <target name="build" description="installation vendor" depends="prepare">
+        <echo msg="Building ..." />
+    </target>
+
+    <!-- Liste des fichier à mettre à jour -->
+    <fileset dir="${project.basedir}" id="config-update">
+        <include name="apps/configs/config.inc.php.dist" />
+        <include name="apps/configs/database.ini.dist" />
+    </fileset>
+
+    <!-- Mise à jour des fichiers configs : modification des paramètres selon l'environnement -->
+    <target name="compile-configuration" description="Modificaion des fichiers configs">
+        <!-- Mise à jour des paramètres des fichiers -->
+        <reflexive>
+            <fileset refid="config-update"/>
+            <filterchain>
+                <replaceregexp>
+                    <!-- DB Config -->
+                    <regexp pattern="#db_host#" replace="${database_host_${env.SCT_BUILD_ENV}}"/>
+                    <regexp pattern="#db_port#" replace="${database_port_${env.SCT_BUILD_ENV}}"/>
+                    <regexp pattern="#db_name#" replace="${database_name_${env.SCT_BUILD_ENV}}"/>
+                    <regexp pattern="#db_user#" replace="${database_user_${env.SCT_BUILD_ENV}}"/>
+                    <regexp pattern="#db_pass#" replace="${database_password_${env.SCT_BUILD_ENV}}"/>
+                    <!-- OTHER -->
+                    <regexp pattern="#site_base_url#" replace="http://${domain_${env.SCT_BUILD_ENV}}/" />
+                    <regexp pattern="#app_version#" replace="${app_version}" />
+                    <regexp pattern="#wkhtmltopdf_path#" replace="${wkhtmltopdf_path_${env.SCT_BUILD_ENV}}" />
+                    <regexp pattern="#is_conso#" replace="${is_conso_${env.SCT_BUILD_ENV}}" />
+                    <regexp pattern="#code_ferme#" replace="${code_ferme_${env.SCT_BUILD_ENV}}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+
+        <!-- Copy configuration -->
+        <copy todir="${project.basedir}">
+            <fileset refid="config-update" />
+            <mapper type="glob" from="*.dist" to="*"/>
+        </copy>
+
+        <!-- Delete using a fileset -->
+        <delete>
+            <fileset refid="config-update" />
+        </delete>
+
+    </target>
+
+    <target name="compile-configuration" description="generer le bon fichier parameters.yml">
+        <echo msg="Compiling configuration ..." />
+    </target>
+
+    <!-- Deploy -->
+    <target name="deploy">
+        <!-- Envoyer l'archive -->
+        <echo msg="envoyer l'archive par FTP" />
+        <exec command="cd ${build_directory}/package ; lftp -u '${ftp-user_${env.SCT_BUILD_ENV}},${ftp-password_${env.SCT_BUILD_ENV}}' ${uri-ftp_${env.SCT_BUILD_ENV}} -e 'put soctam-bin.tar.gz; quit;'" logoutput="true" />
+        <!-- Envoyer le deployeur -->
+        <echo msg="envoyer l'extractor par FTP vers -u '${ftp-user_${env.SCT_BUILD_ENV}},${ftp-password_${env.SCT_BUILD_ENV}}' ${uri-ftp_${env.SCT_BUILD_ENV}}" />
+        <exec command="cd ${project.basedir}/; lftp -u '${ftp-user_${env.SCT_BUILD_ENV}},${ftp-password_${env.SCT_BUILD_ENV}}' ${uri-ftp_${env.SCT_BUILD_ENV}} -e 'put utils/extractor.php; quit;'" logoutput="true" />
+        <!-- Deployer sur le serveur -->
+        <echo msg="exécuter le déploiement curl -sL http://${domain_${env.SCT_BUILD_ENV}}/extractor.php?env=${env.SCT_BUILD_ENV}" />
+        <exec command="curl -sL http://${domain_${env.SCT_BUILD_ENV}}/extractor.php" logoutput="true" />
+        <!-- Supprimer le deployeur -->
+        <echo msg="supprimer l'extracteur par FTP" />
+        <!--<exec command="lftp ${ftp-uri_${env.SCT_BUILD_ENV}} -e 'rm extractor.php; quit;'" logoutput="true" />-->
+        <exec command="lftp -u '${ftp-user_${env.SCT_BUILD_ENV}},${ftp-password_${env.SCT_BUILD_ENV}}' ${uri-ftp_${env.SCT_BUILD_ENV}} -e 'rm extractor.php; quit;'" logoutput="true" />
+    </target>
+</project>

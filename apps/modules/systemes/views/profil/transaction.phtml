@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Créer une transaction pour <?= $username     ?></h4>
+        <br>
+    </div>
+</div>
+
+<form method="post" class="form-valida">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Transaction</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="mouvement" name="mouvement"
+                       placeholder="Transaction" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-6">
+                <select class="form-control selectpicker" id="mode" name="mode" required>
+                    <option value="credit">Crédit</option>
+                    <option value="debit">Débit</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Montant (<?=UNITE_MONETAIRE?>)</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="valeur" name="valeur" placeholder="Montant" required>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Sauvegarder</button>
+    </div>
+</form>

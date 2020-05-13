@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Administration</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="/themes/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/themes/css/bootstrap-select.min.css" rel="stylesheet">
+        <link href="/themes/css/jquery-ui.css" rel="stylesheet">
+        <!--Personnal CSS-->
+        <link href="/themes/css/soctam.css" rel="stylesheet" type="text/css">
+        <!-- MetisMenu CSS -->
+        <link href="/themes/css/fonts.css" rel="stylesheet">
+        <link href="/themes/css/metisMenu.css" rel="stylesheet">
+        <!--MAGIC CHECK-->
+        <link href="/themes/css/magic-check.min.css" rel="stylesheet">
+        <!-- Timeline CSS -->
+        <link href="/themes/css/timeline.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/themes/css/sb-admin-2.css" rel="stylesheet">
+        <!-- Morris Charts CSS jquery.dataTables.min -->
+        <link href="/themes/css/morris.css" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="/themes/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Datatble css -->
+        <link href="/themes/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+        <!-- Multifreezer CSS -->
+        <link rel="stylesheet" href="/themes/css/multifreezer.css">
+        <!-- Typeahead CSS -->
+        <link rel="stylesheet" href="/themes/css/typeaheadmenu.min.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <!-- script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script  -->
+        <!--script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script -->
+        <![endif]-->
+        <!-- jQuery -->
+        <script src="/themes/js/jquery.min.js"></script>
+        <script src="/themes/js/jquery-ui.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/themes/js/bootstrap.min.js"></script>
+        <script src="/themes/js/bootstrap-select.min.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="/themes/js/metisMenu.min.js"></script>
+        <!--slinscroll-->
+        <script src="/themes/js/jquery.slimscroll.min.js"></script>
+        <!-- Plugin datatable -->
+        <script src="/themes/js/jquery.dataTables.min.js"></script>
+        <script src="/themes/js/valida.min.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="/themes/js/sb-admin-2.js"></script>
+        <!-- Custom  JavaScript -->
+        <script src="/themes/js/soctam.js"></script>
+        <!--Modal dialog avec recap-->
+        <script src="/themes/js/modalRecap.js"></script>
+        <!--Multifreezer header-->
+        <script src="/themes/js/multifreezer.js"></script>
+        <script src="/themes/js/underscore-min.js"></script>
+        <script src="/themes/js/moment.js"></script>
+        <script src="/themes/js/waitingfor.js"></script>
+
+        <style>
+            .version{
+                position: absolute;
+                left: 277px;
+                top: 66px;
+                font-size: 0.7em;
+            }
+        </style>
+    </head>
+    <body class="">
+        <!--modal alert lors d'une ajax-->
+        <div id="modal-wait-please" class="modal fade" role="dialog">        
+            <div class="modal-dialog modal-xs" style="margin-top: 250px ">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="center-block">   
+                            <img src="/../../themes/images/ajax-loader.gif" style="width: 100%">
+                        </div>
+                        <p id="modal-wait-please-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--fin modal-->
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="row header-content">
+                    <div class="col-md-2 nopadding  header-element logo-top">
+                        <a href="/">
+                            <div class="logo">
+                                <div class="logo-content-header">
+                                    <div class="logo-header">L</div>
+                                    <div class="soctam-header"> SOCTAM</div>
+                                </div>
+                                <div class="version">
+                                    <label><?= VERSION ?></label>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+                    <div class="col-md-10 nopadding  header-element  info-top">
+                        <div class="filariane">
+                            <?php
+                            $dataSess = Session::getUser();
+                            ?>
+                            <?php if (!IS_CONSO) : ?>
+                                <label class="name-site"> <i class="material-icons">account_balance</i> &nbsp;<?php
+                                    if (count($dataSess)) {
+                                        echo $dataSess->site_name;
+                                    } else {
+                                        echo "De SOCTAM";
+                                    }
+                                    ?>
+                                    <!-- - --><?/*= ' ferme ' . FERME */?>
+                                </label>
+                            <?php else : ?>
+                                <label class="name-site"><i class="material-icons">account_balance</i> &nbsp;Application consolidée</label>
+                            <?php endif; ?>
+
+                            <label class="filariane-content">
+                                <?php Layout::render('part/crumbs'); ?>
+                            </label>
+                        </div>
+                        <div class="info-user-header">
+                            <?php Layout::render('part/menu-header'); ?>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!--<div class="navbar-header">-->
+            <?php //Layout::render('part/menu-top');?>
+            <!--</div>-->
+            <!-- /.navbar-header -->
+            <?php // Layout::render('part/menu-header');?>
+            <?php // Layout::render('part/menu-left');?>
+            <div id="page-wrapper" class="page-wrapper">
+                <div class="row mainwrapper">
+                    <div class="col-md-2 nopadding menu-sidebar-left content-element ">
+                        <?php Layout::render('part/menu-left'); ?>
+                    </div>
+                    <div class="col-md-10 nopadding main-content content-element  ">
+                        <?php Layout::render('part/message'); ?>
+                        <div id="recap"></div>
+                        <?php echo Layout::renderView($content) ?>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+
+<!--        <script>
+            function chargement(parameters) {
+                var selecteur = parameters.selecteur;
+                var chiffre = parameters.chiffre;
+                var html = "";
+
+                if (chiffre !== undefined) {
+                    html = '<div class="progress progress-striped" style="margin-bottom:0;"><div class="progress-bar" role="progressbar" style="width: ' + chiffre + '%"> ' + chiffre + '% Complete </div></div>';
+                    /* html = html + "<div class='text-center'>"
+                     + chiffre
+                     + "</div>"*/
+                } else {
+                    html = '<div class="progress progress-striped" style="margin-bottom:0;"><div class="progress-bar" role="progressbar" aria-valuenow="5" style="width: 100%"> Chargement </div></div>';
+                }
+
+
+                $(selecteur).html(html);
+
+            }
+
+        </script>-->
+
+    </body>
+</html>

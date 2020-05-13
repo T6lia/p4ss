@@ -1,0 +1,12 @@
+<?php
+
+DEFINE( "USE_REWRITE_ENGINE", 1);
+DEFINE( "OFFLINE_MODE", 0);
+
+DEFINE( "SITE_URL", "#site_base_url#");
+DEFINE( "ABSOLUTE_DIR", getcwd());
+DEFINE( "IS_CONSO", '#is_conso#');
+DEFINE( "FERME", '#code_ferme#');
+DEFINE( "VERSION", '#app_version#'); // Version de l'application : Format : vx.y.z : x : lot, y : itération, x : révision
+DEFINE( "UNITE_MONETAIRE", 'Ar');
+DEFINE( "PDF_BINARY", '#wkhtmltopdf_path#');

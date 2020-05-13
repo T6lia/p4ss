@@ -1,0 +1,29 @@
+
+<?php
+$crumbs = Layout::getCrumbs();
+if (isset($crumbs[0]) && count($crumbs) > 0):
+    $crumbs = $crumbs[0];
+    ?>
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo  '/' ?>">Tableau de bord</a></li>
+                    <?php foreach ($crumbs as $crumb) : ?>
+                        <?php if (!$crumb['isActive']): ?>
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a href="<?php echo $crumb['url'] ?>">
+                                    <?php echo $crumb['label'] ?>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <?php echo $crumb['label'] ?>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ol>
+            </nav>
+        </div>
+    </div>
+<?php endif; ?>

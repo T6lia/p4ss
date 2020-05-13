@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="card-footer page-header text-center">Modifier pack</h4>
+        <br>
+    </div>
+</div>
+<form method="post" class="form-valida">
+    <div class="card-body">
+        <input type="hidden" name="id" id="id" value="<?=$data['id']?>">
+        <div class="form-group row">
+            <label for="nom_pack" class="col-sm-2 col-form-label">Nom du pack</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="nom_pack" name="nom_pack" value="<?= $data['nom_pack']?>"
+                       placeholder="Nom du pack">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus_direct" class="col-sm-2 col-form-label">Bonus direct</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="bonus_direct" name="bonus_direct"
+                       value="<?= $data['bonus_direct']?>" placeholder="Nombre d'affilié" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus_indirect" class="col-sm-2 col-form-label">Bonus indirect</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="bonus_indirect" name="bonus_indirect"
+                       value="<?= $data['bonus_indirect']?>" placeholder="Nombre d'affilié" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="niveau" class="col-sm-2 col-form-label">Nombre de niveau</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="niveau" name="niveau"
+                       value="<?= $data['niveau']?>" placeholder="Nombre de niveau" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="largeur" class="col-sm-2 col-form-label">Largeur</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="largeur" name="largeur"
+                       value="<?= $data['largeur']?>" placeholder="Nombre de largeur" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="bonus" class="col-sm-2 col-form-label">Bonus</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="bonus" name="bonus" value="<?= $data['bonus']?>"
+                       placeholder="Bonus">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="prix" class="col-sm-2 col-form-label">Prix</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="prix" name="prix" value="<?= $data['prix']?>"
+                       placeholder="Prix">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="validite_debut" class="col-sm-2 col-form-label">Validité</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control datepicker" id="validite_fin" name="validite_fin"
+                       value="<?= $data['validite_fin'] ?>" required>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success float-right">Modifier</button>
+        <a type="button" class="btn btn-info float-lg-left" href="/systemes/pack/liste">Retour</a>
+    </div>
+</form>

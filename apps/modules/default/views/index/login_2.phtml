@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 nopadding login-left-container">
+            <div class="login-left">
+                <div class="login-img">
+                </div>
+                <div class="login-logo">
+                    <div class="logo-content">
+                        <div class="logo-img">L</div>
+                        <div class="logo-text">
+                            <span class="soctam-text">SOCTAM</span>
+                            <span class="soctam-slogan">Société de Culture de Tabac à Madagascar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-7 nopadding login-right-container ">
+            <div class="login-panel panel panel-default">
+                <?php if (isset($message)): ?>
+                    <div class="panel-heading">
+                        <h3 class="<?php echo $message['code']?>"><?php echo $message['message'] ?></h3>
+                    </div>
+                <?php endif; ?>
+                <div class="panel-heading">
+                    <h3 class="panel-title-icons"><i class="material-icons">lock</i><label>Authentification</label></h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="/index/connect/" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Nom d'utilisateur" name="username" type="text" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Mot de passe" name="password" type="password" value="">
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Se connecter</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
